@@ -8,22 +8,19 @@ use App\Models\Book;
 
 class SearchBookController extends Controller
 {
-    // Fitur Search
     public function search(Request $request)
     {
-        $query = Book::query();
+        $keyword = $request->query('q'); // ⬅️ Sama dengan fetch()
 
+        $books = Book::when($keyword, function ($query) use ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('book_name', 'like', "%{$keyword}%")
+                    ->orWhere('description', 'like', "%{$keyword}%");
+            });
+        })
+            ->latest()
+            ->get();
 
-        if ($request->book_name) {
-            $query->where('book_name', 'like', '%' . $request->book_name . '%');
-        }
-
-
-        if ($request->description) {
-            $query->where('description', 'like', '%' . $request->description . '%');
-        }
-
-
-        return response()->json($query->get());
+        return response()->json($books);
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
 use App\Models\Book;
 
-class ViewsBookController extends Controller
+class BooksController extends Controller
 {
     // List Buku dan Pagenation
     public function index()
     {
         $books = Book::paginate(4); // default 4 per halaman
-        return response()->json($books);
+        return view('Main', compact('books'));
     }
 }
