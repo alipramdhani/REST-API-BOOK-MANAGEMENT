@@ -210,16 +210,8 @@ GET /books/search
 **Contoh Request**
 
 ```
-GET /books/search?book_name=Laravel
+GET /books/search?q=Laravel
 ```
-
-Atau:
-
-```
-GET /books/search?description=framework
-```
-
----
 
 ## 🧪 Testing
 
