@@ -102,12 +102,14 @@
                                             >
                                                 Edit
                                             </button>
+                                            @include('partials.UpdateBooks')
                                             <button
                                                 class="btn btn-danger btn-sm"
                                                 onclick="openDeleteModal({{ $book->id }}, '{{ addslashes($book->book_name) }}')"
                                             >
                                                 Hapus
                                             </button>
+                                            @include('partials.DeleteBooks')
                                         </td>
                                     </tr>
                                 @empty
